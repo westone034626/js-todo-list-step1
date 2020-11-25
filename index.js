@@ -2,6 +2,34 @@ const toDoApp = document.querySelector(".todoapp");
 const input = toDoApp.querySelector("input");
 const todo_list = document.querySelector(".todo-list");
 
+
+function handleEdit(event) {
+    const li = event.target.parentNode;
+    const currentValue = event.target.value;
+    if (event.key === 'Enter' && currentValue !== "") {
+        const span = document.createElement("span");
+        span.addEventListener("dblclick", handleDBClick);
+        span.innerHTML = currentValue;
+        li.replaceChild(span, event.target);
+    }
+    else if (event.key === 'Escape') {
+        const span = document.createElement("span");
+        span.addEventListener("dblclick", handleDBClick);
+        span.innerHTML = event.target.name;
+        li.replaceChild(span, event.target);
+    }
+}
+
+function handleDBClick(event) {
+    const span = event.target;
+    const li = span.parentNode;
+    const input = document.createElement("input");
+    input.value = span.innerHTML;
+    input.name = span.innerHTML;
+    input.addEventListener("keydown",handleEdit);
+    li.replaceChild(input, span);
+}
+
 function handleDelete(event) {
     const li = event.target.parentNode;
     todo_list.removeChild(li);
@@ -22,6 +50,7 @@ function createToDoItem(text) {
     checkbox.type = "checkbox";
     checkbox.addEventListener("click", handleClick);
     span.innerHTML = text;
+    span.addEventListener("dblclick", handleDBClick);
     delBtn.innerHTML = "❎";
     delBtn.addEventListener("click", handleDelete);
     li.appendChild(checkbox);
