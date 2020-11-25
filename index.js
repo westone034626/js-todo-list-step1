@@ -1,7 +1,12 @@
 const toDoApp = document.querySelector(".todoapp");
 const input = toDoApp.querySelector("input");
 const todo_list = document.querySelector(".todo-list");
+const todo_count_container = document.querySelector(".todo-count");
+const todo_count = todo_count_container.querySelector("strong");
 
+function updateToDoCount() {
+    todo_count.innerHTML = todo_list.children.length;
+}
 
 function handleEdit(event) {
     const li = event.target.parentNode;
@@ -33,6 +38,7 @@ function handleDBClick(event) {
 function handleDelete(event) {
     const li = event.target.parentNode;
     todo_list.removeChild(li);
+    updateToDoCount();
 }
 
 function handleClick(event) {
@@ -65,6 +71,7 @@ function handleSubmit(event) {
         const currentValue = input.value;
         createToDoItem(currentValue);
         input.value = "";
+        updateToDoCount();
     }
 }
 
