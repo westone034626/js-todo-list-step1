@@ -60,9 +60,9 @@ function createToDoItem(text) {
 }
 
 function handleSubmit(event) {
-  if (event.key == "Enter" && input.value !== "") {
-    const currentValue = input.value;
-    createToDoItem(currentValue);
+  const targetValue = event.target.value;
+  if (event.key == "Enter" && targetValue !== "") {
+    createToDoItem(targetValue);
     input.value = "";
     updateToDoCount();
   }
