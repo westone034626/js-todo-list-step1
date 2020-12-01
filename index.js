@@ -8,24 +8,24 @@ function updateToDoCount() {
 }
 
 function handleEdit(event) {
+  const li = event.target.parentNode;
   if (event.key === "Enter" && event.target.value !== "") {
-    event.target.parentNode.querySelector("label").innerHTML =
-      event.target.value;
-    event.target.parentNode.classList.remove("editing");
+    li.querySelector("label").innerHTML = event.target.value;
+    li.classList.remove("editing");
   } else if (event.key === "Escape") {
-    event.target.parentNode.querySelector("label").innerHTML =
-      event.target.name;
-    event.target.parentNode.classList.remove("editing");
+    li.querySelector("label").innerHTML = event.target.tempValue;
+    li.classList.remove("editing");
   }
 }
 
 function handleDBClick(event) {
   if (event.target.tagName === "LABEL") {
     const original = event.target.innerHTML;
-    event.target.parentNode.parentNode.classList.add("editing");
-    const subInput = event.target.parentNode.parentNode.querySelector(".edit");
+    const li = event.target.parentNode.parentNode;
+    li.classList.add("editing");
+    const subInput = li.querySelector(".edit");
     subInput.value = original;
-    subInput.name = original;
+    subInput.tempValue = original;
     subInput.addEventListener("keyup", handleEdit);
   }
 }
@@ -34,14 +34,13 @@ function handleDelete(event) {
   if (event.target.tagName === "BUTTON") {
     const li = event.target.parentNode.parentNode;
     todoList.removeChild(li);
+    updateToDoCount();
   }
-  updateToDoCount();
 }
 
 function handleComplete(event) {
   if (event.target.tagName === "INPUT") {
-    if (event.target.closest("input").checked) {
-      console;
+    if (event.target.checked) {
       event.target.parentNode.parentNode.classList.add("completed");
     } else {
       event.target.parentNode.parentNode.classList.remove("completed");
