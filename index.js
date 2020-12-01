@@ -77,7 +77,7 @@ function handleComplete(event) {
   }
 }
 
-function createToDoItem(todo) {
+function paintTodoItem(todo) {
   const li = document.createElement("li");
   li.id = todo.id;
   if (todo.isActive === false) {
@@ -106,7 +106,7 @@ function handleSubmit(event) {
       id: allTodos.length + 1,
       isActive: true,
     };
-    allTodos.push(createToDoItem(todoObj));
+    allTodos.push(paintTodoItem(todoObj));
     input.value = "";
     updateToDoCount();
   }
@@ -142,7 +142,7 @@ function handleFilter(event) {
 
   makeEmpty();
   currentTodos.forEach(function (todo) {
-    createToDoItem(todo);
+    paintTodoItem(todo);
   });
   updateToDoCount();
 }
