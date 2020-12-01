@@ -34,8 +34,10 @@ function handleDBClick(event) {
 }
 
 function handleDelete(event) {
-  const li = event.target.parentNode;
-  todo_list.removeChild(li);
+  if (event.target.tagName === "BUTTON") {
+    const li = event.target.parentNode.parentNode;
+    todoList.removeChild(li);
+  }
   updateToDoCount();
 }
 
@@ -75,6 +77,7 @@ function handleSubmit(event) {
 function init() {
   input.addEventListener("keypress", handleSubmit);
   todoList.addEventListener("click", handleComplete);
+  todoList.addEventListener("click", handleDelete);
 }
 
 init();
