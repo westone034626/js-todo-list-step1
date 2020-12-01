@@ -7,7 +7,6 @@ const filters = document.querySelector(".filters");
 let allTodos = [];
 
 function makeEmpty() {
-  console.log("executed makeEmpty");
   while (todoList.firstChild) {
     todoList.removeChild(todoList.firstChild);
   }
@@ -22,9 +21,19 @@ function handleEdit(event) {
   if (event.key === "Enter" && event.target.value !== "") {
     li.querySelector("label").innerHTML = event.target.value;
     li.classList.remove("editing");
+    allTodos.forEach(function (todo) {
+      if (parseInt(li.id) === todo.id) {
+        todo.text = li.querySelector("label").innerHTML;
+      }
+    });
   } else if (event.key === "Escape") {
     li.querySelector("label").innerHTML = event.target.tempValue;
     li.classList.remove("editing");
+    allTodos.forEach(function (todo) {
+      if (parseInt(li.id) === todo.id) {
+        todo.text = li.querySelector("label").innerHTML;
+      }
+    });
   }
 }
 
@@ -63,7 +72,7 @@ function handleComplete(event) {
         i.isActive = false;
       }
     }
-  } else {
+  } else if (isCheckBox && isCheckBox.checked === false) {
     event.target.closest("li").classList.remove("completed");
     for (let i of allTodos) {
       if (i.id === parseInt(event.target.closest("li").id)) {
@@ -71,7 +80,6 @@ function handleComplete(event) {
       }
     }
   }
-  console.log("after complete process: ", allTodos);
 }
 
 function createToDoItem(todo) {
