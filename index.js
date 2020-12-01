@@ -29,11 +29,6 @@ function handleEdit(event) {
   } else if (event.key === "Escape") {
     li.querySelector("label").innerHTML = event.target.tempValue;
     li.classList.remove("editing");
-    allTodos.forEach(function (todo) {
-      if (parseInt(li.id) === todo.id) {
-        todo.text = li.querySelector("label").innerHTML;
-      }
-    });
   }
 }
 
@@ -105,12 +100,12 @@ function createToDoItem(todo) {
 }
 
 function handleSubmit(event) {
-  const todoObj = {
-    text: event.target.value,
-    id: allTodos.length + 1,
-    isActive: true,
-  };
   if (event.key == "Enter" && event.target.value !== "") {
+    const todoObj = {
+      text: event.target.value,
+      id: allTodos.length + 1,
+      isActive: true,
+    };
     allTodos.push(createToDoItem(todoObj));
     input.value = "";
     updateToDoCount();
