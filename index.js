@@ -1,11 +1,10 @@
-const toDoApp = document.querySelector(".todoapp");
-const input = toDoApp.querySelector("input");
-const todo_list = document.querySelector(".todo-list");
+const input = document.querySelector("input");
+const todoList = document.querySelector(".todo-list");
 const todo_count_container = document.querySelector(".todo-count");
 const todo_count = todo_count_container.querySelector("strong");
 
 function updateToDoCount() {
-  todo_count.innerHTML = todo_list.children.length;
+  todo_count.innerHTML = todoList.children.length;
 }
 
 function handleEdit(event) {
@@ -40,11 +39,15 @@ function handleDelete(event) {
   updateToDoCount();
 }
 
-function handleClick(event) {
-  const checkbox = event.target;
-  const li = checkbox.parentNode;
-  li.classList.toggle("completed");
-  checkbox.classList.toggle("checked");
+function handleComplete(event) {
+  if (event.target.tagName === "INPUT") {
+    if (event.target.closest("input").checked) {
+      console;
+      event.target.parentNode.parentNode.classList.add("completed");
+    } else {
+      event.target.parentNode.parentNode.classList.remove("completed");
+    }
+  }
 }
 
 function createToDoItem(text) {
@@ -57,7 +60,7 @@ function createToDoItem(text) {
     </div>
     <input class="edit" value="새로운 타이틀" />
   `;
-  todo_list.appendChild(li);
+  todoList.appendChild(li);
 }
 
 function handleSubmit(event) {
@@ -71,6 +74,7 @@ function handleSubmit(event) {
 
 function init() {
   input.addEventListener("keypress", handleSubmit);
+  todoList.addEventListener("click", handleComplete);
 }
 
 init();
