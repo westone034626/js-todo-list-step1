@@ -31,16 +31,11 @@ function handleDBClick(event) {
 }
 
 function handleDelete(event) {
-  const isdelBtn = event.target.closest(".destroy");
-  if (isdelBtn) {
-    const li = isdelBtn.parentNode.parentNode;
+  const isDelBtn = event.target.closest(".destroy");
+  if (isDelBtn) {
+    const li = isDelBtn.parentNode.parentNode;
     todoList.removeChild(li);
   }
-  //   if (event.target.tagName === "BUTTON") {
-  //     const li = event.target.parentNode.parentNode;
-  //     todoList.removeChild(li);
-  //     updateToDoCount();
-  //   }
 }
 
 function handleComplete(event) {
