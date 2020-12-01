@@ -39,12 +39,10 @@ function handleDelete(event) {
 }
 
 function handleComplete(event) {
-  if (event.target.tagName === "INPUT") {
-    if (event.target.checked) {
-      event.target.parentNode.parentNode.classList.add("completed");
-    } else {
-      event.target.parentNode.parentNode.classList.remove("completed");
-    }
+  if (event.target.closest(".toggle").checked) {
+    event.target.closest("li").classList.toggle("completed");
+  } else {
+    event.target.closest("li").classList.toggle("completed");
   }
 }
 
