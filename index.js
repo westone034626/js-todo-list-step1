@@ -8,29 +8,33 @@ function updateToDoCount() {
 }
 
 function handleEdit(event) {
-  const li = event.target.parentNode;
-  const currentValue = event.target.value;
-  if (event.key === "Enter" && currentValue !== "") {
-    const span = document.createElement("span");
-    span.addEventListener("dblclick", handleDBClick);
-    span.innerHTML = currentValue;
-    li.replaceChild(span, event.target);
+  if (event.key === "Enter" && event.target.value !== "") {
+    event.target.parentNode.querySelector("label").innerHTML =
+      event.target.value;
+    event.target.parentNode.classList.remove("editing");
   } else if (event.key === "Escape") {
-    const span = document.createElement("span");
-    span.addEventListener("dblclick", handleDBClick);
-    span.innerHTML = event.target.name;
-    li.replaceChild(span, event.target);
+    event.target.parentNode.querySelector("label").innerHTML =
+      event.target.name;
+    event.target.parentNode.classList.remove("editing");
   }
 }
 
 function handleDBClick(event) {
-  const span = event.target;
-  const li = span.parentNode;
-  const input = document.createElement("input");
-  input.value = span.innerHTML;
-  input.name = span.innerHTML;
-  input.addEventListener("keydown", handleEdit);
-  li.replaceChild(input, span);
+  if (event.target.tagName === "LABEL") {
+    const original = event.target.innerHTML;
+    event.target.parentNode.parentNode.classList.add("editing");
+    const subInput = event.target.parentNode.parentNode.querySelector(".edit");
+    subInput.value = original;
+    subInput.name = original;
+    subInput.addEventListener("keyup", handleEdit);
+  }
+  //   const span = event.target;
+  //   const li = span.parentNode;
+  //   const input = document.createElement("input");
+  //   input.value = span.innerHTML;
+  //   input.name = span.innerHTML;
+  //   input.addEventListener("keydown", handleEdit);
+  //   li.replaceChild(input, span);
 }
 
 function handleDelete(event) {
@@ -78,6 +82,7 @@ function init() {
   input.addEventListener("keypress", handleSubmit);
   todoList.addEventListener("click", handleComplete);
   todoList.addEventListener("click", handleDelete);
+  todoList.addEventListener("dblclick", handleDBClick);
 }
 
 init();
