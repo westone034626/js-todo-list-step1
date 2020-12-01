@@ -28,13 +28,6 @@ function handleDBClick(event) {
     subInput.name = original;
     subInput.addEventListener("keyup", handleEdit);
   }
-  //   const span = event.target;
-  //   const li = span.parentNode;
-  //   const input = document.createElement("input");
-  //   input.value = span.innerHTML;
-  //   input.name = span.innerHTML;
-  //   input.addEventListener("keydown", handleEdit);
-  //   li.replaceChild(input, span);
 }
 
 function handleDelete(event) {
