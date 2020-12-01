@@ -39,10 +39,8 @@ function handleDelete(event) {
 }
 
 function handleComplete(event) {
-  if (
-    event.target.closest(".toggle") &&
-    event.target.closest(".toggle").checked
-  ) {
+  const isCheckBox = event.target.closest(".toggle");
+  if (isCheckBox && isCheckBox.checked) {
     event.target.closest("li").classList.add("completed");
   } else {
     event.target.closest("li").classList.remove("completed");
