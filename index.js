@@ -149,6 +149,7 @@ function handleFilter(event) {
   currentTodos.forEach(function (todo) {
     createToDoItem(todo);
   });
+  updateToDoCount();
 }
 
 function init() {
