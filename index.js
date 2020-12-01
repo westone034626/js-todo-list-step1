@@ -36,6 +36,7 @@ function handleDelete(event) {
   if (isDelBtn) {
     const li = isDelBtn.parentNode.parentNode;
     todoList.removeChild(li);
+    updateToDoCount();
   }
 }
 
