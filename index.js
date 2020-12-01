@@ -19,9 +19,10 @@ function handleEdit(event) {
 }
 
 function handleDBClick(event) {
-  if (event.target.tagName === "LABEL") {
-    const original = event.target.innerHTML;
-    const li = event.target.parentNode.parentNode;
+  const isLabel = event.target.closest(".label");
+  if (isLabel) {
+    const original = isLabel.innerHTML;
+    const li = isLabel.parentNode.parentNode;
     li.classList.add("editing");
     const subInput = li.querySelector(".edit");
     subInput.value = original;
